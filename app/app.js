@@ -55,9 +55,6 @@ game.factory('Quest', [ function () {
 
 game.factory('Hero', function () {
 
-    /**
-     * Constructor, with class name
-     */
     function Hero(params) {
         this.name = undefined;
         this.speed = 1;

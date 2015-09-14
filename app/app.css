@@ -1,5 +1,9 @@
 /* app css stylesheet */
 
+body{
+  width: 100%;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -27,4 +31,13 @@
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+#app-screen{
+  min-height: 500px;
+  min-width: 300px;
+  max-height: 600px;
+  max-width: 400px;
+  background-color: #1b6d85;
+  margin-top: 50px;
 }
