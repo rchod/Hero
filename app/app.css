@@ -35,9 +35,18 @@ body{
 
 #app-screen{
   min-height: 500px;
-  min-width: 300px;
+  min-width: 400px;
   max-height: 600px;
-  max-width: 400px;
-  background-color: #1b6d85;
+  max-width: 500px;
   margin-top: 50px;
+}
+
+#left-menu{
+  background-color: #5bc0de;
+  height: 100%;
+}
+
+#center{
+  background-color: #1b6d85;
+  height: 100%;
 }
