@@ -2,11 +2,11 @@
 
 var game = angular.module('myApp', []);
 
-game.factory('Quest', [ function () {
+game.factory('Quest', ['Hero', function (Hero) {
 
     function Quest(params) {
         this.name = undefined;
-        this.time = 10;
+        this.time = 5;
         this.goldRew = 200;
         this.honorRew = 100;
         this.goldReq = 100;
@@ -27,19 +27,20 @@ game.factory('Quest', [ function () {
         start: function(){
             var st = 0;
             var id = setInterval(function(){
-                st = st + 0.5;
+                st = st + 0.2;
                 this.progress = st/this.time;
                 $scope.$apply();
-                if(st>=this.time)
+                if(st >= this.time){
                     clearInterval(id);
-            }.bind(this),500);
+                    this.finished();
+                    $scope.hero.SaveState();
+                    console.log("Quest",this.name, "finished");
+                }
+
+            }.bind(this),100);
 
             console.log("Quest",this.name, "started");
 
-            setTimeout(function(){
-                this.finished();
-                console.log("Quest",this.name, "finished");
-            }.bind(this), this.time*1000);
         },
         finished: function(){
             $scope.hero.gold += this.goldRew;
@@ -83,6 +84,13 @@ game.factory('Hero', function () {
         },
         startQuest: function(quest){
             quest.start();
+        },
+        SaveState: function () {
+            sessionStorage.Hero = angular.toJson($scope.hero);
+        },
+
+        RestoreState: function () {
+            Hero = angular.fromJson(sessionStorage.userService);
         }
     }
 
@@ -97,7 +105,7 @@ game.controller('GameCtrl', ['$scope', 'Hero', 'Quest', function($scope, Hero, Q
     $scope.hero = new Hero({name:'rachid', age:27, gold: 122});
 
     $scope.quests = [];
-    $scope.quests.push(new Quest({name:'firstQuest'}));
+    $scope.quests.push(new Quest({name:'firstQuest', time:10 }));
     $scope.quests.push(new Quest({name:'secondQuest'}));
 
     window.$scope = $scope;

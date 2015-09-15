@@ -50,3 +50,7 @@ body{
   background-color: #1b6d85;
   height: 100%;
 }
+
+progress {
+  background-color: #c2c2c2;
+}
